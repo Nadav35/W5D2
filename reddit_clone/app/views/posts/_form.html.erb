@@ -1,0 +1,37 @@
+<% action = type == :edit ? post_url(post) : posts_url %>
+<% button_txt = type == :edit ? "Edit Post" : "Create Post" %>
+
+<form action="<%= action %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  
+  <% if type == :edit %>
+    <input type="hidden"
+    name="_method"
+    value="patch">
+  <% end %>
+  <label for="title">
+  Title:
+  <input type="text" name="post[title]" value="<%= post.title %>">
+</label><br>
+  
+  <label for="url">
+  URL:
+  <input type="text" name="post[url]" value="<%= post.url %>">
+</label><br>
+  <textarea name="post[content]"><%= post.content %></textarea><br>
+  <input type="hidden" name="post[sub_ids][]" value="">
+  
+  <% get_subs.each do |subb| %>
+    <li>
+      <label>
+        <input type="checkbox" name="post[sub_ids][]" value="<%= subb.id %>">
+        <%= subb.title %>
+      </label>
+    </li>
+  
+  <% end %>
+  
+  <button type="submit">Make Post</button>
+  
+  
+</form>

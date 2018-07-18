@@ -1,0 +1,23 @@
+<% action = subb.persisted? ? sub_url(subb) : subs_url %>
+<% button_txt = subb.persisted? ? "Edit Sub" : "Create Sub" %>
+
+<form action="<%= action %>" method="post">
+  <% if type == :edit %>
+    <input type="hidden"
+    name="_method"
+    value="patch">
+  <% end %>
+  
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  
+  <label>Title
+    <input type="text" name="sub[title]" value="<%= subb.title %>">
+  </label>
+  
+  <label>Description
+    <input type="text" name="sub[description]" value="<%= subb.description %>">
+  </label>
+  
+  <button type="submit" name="button"><%= button_txt %></button>
+  
+</form>

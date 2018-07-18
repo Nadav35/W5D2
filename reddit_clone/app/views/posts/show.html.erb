@@ -1,0 +1,24 @@
+<a href="<%= post_url(@post) %>"><%= @post.title %></a> by <%= @post.author.username %>
+
+<h3>content: </h3>
+<%= @post.content %>
+
+<h3>Subs</h3>
+
+<ul>
+  <% @post.subs.each do |subb| %>
+    <li>
+      <a href="<%= sub_url(subb) %>"><%= subb.title %></a>
+    </li>
+  <% end %>
+</ul>
+
+<h1>Comments</h1>
+
+<a href="<%= new_post_comment_url(@post) %>">Comment on this post!</a>
+
+<ul>
+  <% @post.comments.each do |comment| %>
+    <li><a href="#"><%= comment.content %></a></li>
+  <% end %>
+</ul>
